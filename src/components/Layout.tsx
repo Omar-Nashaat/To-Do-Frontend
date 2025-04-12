@@ -1,13 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-const MillerCompanyLayOut: React.FC = () => {
+const Layout: React.FC = () => {
     return (
         <>
-            {/* <Navbar /> */}
             <Outlet />
         </>
     );
 };
 
-export default MillerCompanyLayOut;
+export default Layout;
