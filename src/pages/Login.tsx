@@ -30,13 +30,17 @@ const Login = () => {
                             </div>
                         </div>
                     </div>
+                    <div className='flex items-center mt-5 gap-2'>
+                        <input type="checkbox" id="remember-me" className="w-4 h-4" />
+                        <label htmlFor="remember-me" className="text-[14px] font-normal text-[#969AB8]">Remember me</label>
+                    </div>
                     <div className='mt-[24px]'>
                         <button className="bg-[#00E2AC] text-white w-full rounded-[8px] text-[15px] font-semibold py-3 hover:bg-[#00D0B9] transition-all ease-in-out duration-300">Log In</button>
                     </div>
                     <div className='mt-[24px] mb-[40px] md:mb-[0px]'>
                         <p className='text-[#969AB8] text-[15px] font-normal'>Don't have an account? <Link to="/register" className='text-[#00E2AC] font-semibold'>Sign Up</Link></p>
                     </div>
-                </div>  
+                </div>
             </div>
             <div className='col-span-12 md:col-span-7 relative'>
                 <img src={bg} alt="vase background image" className='w-full md:h-screen' />
