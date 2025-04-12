@@ -18,7 +18,7 @@ const Regitser = () => {
         </div>
       </div>
       <div className='col-span-12 md:col-span-5'>
-        <div className='flex flex-col w-[80%] md:w-[60%] mx-auto mt-[40px] md:mt-[170px]'>
+        <div className='flex flex-col w-[80%] md:w-[60%] mx-auto mt-[40px] md:mt-[200px]'>
           <div className='mb-[30px]'>
             <h3 className='text-[30px] font-semibold'>Sign Up</h3>
           </div>
