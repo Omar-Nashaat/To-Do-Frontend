@@ -1,5 +1,5 @@
 import { useState, useEffect, KeyboardEvent } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { MdAdd, MdArrowBack, MdDragIndicator } from 'react-icons/md';
 import {
   DndContext,
@@ -112,11 +112,11 @@ const SortableTaskItem = ({
 };
 
 const TodoList = () => {
-  const { id } = useParams<{ id: string }>();
+  // const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [title, setTitle] = useState(() => {
-    return "Sample Todo List";
-  });
+  // const [title, setTitle] = useState(() => {
+  //   return "Sample Todo List";
+  // });
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
@@ -253,7 +253,7 @@ const TodoList = () => {
             >
               <MdArrowBack size={24} />
             </button>
-            <h1 className="text-2xl font-semibold text-[#3A424A]">{title}</h1>
+            <h1 className="text-2xl font-semibold text-[#3A424A]">Sample Todo List</h1>
           </div>
         </div>
       </div>
