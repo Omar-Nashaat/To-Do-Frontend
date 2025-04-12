@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 const MillerCompanyLayOut: React.FC = () => {
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <Outlet />
         </>
     );
