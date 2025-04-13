@@ -1,27 +1,20 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
-// Create Axios instance
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
 
-// Add request interceptor
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const authString = localStorage.getItem('auth');
+    const authString = localStorage.getItem('token');
     let token: string | undefined;
 
     if (authString) {
-      try {
-        const authData = JSON.parse(authString) as { accessToken?: string };
-        token = authData?.accessToken;
-      } catch (err) {
-        console.warn('Invalid auth data in localStorage', err);
-      }
+      token = authString;
     }
 
     if (token && config.headers) {
