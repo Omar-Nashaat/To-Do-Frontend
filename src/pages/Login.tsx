@@ -8,6 +8,7 @@ import axiosInstance from '../services/api/axios';
 import toast from 'react-hot-toast';
 import { jwtDecode } from 'jwt-decode';
 import { IJwtCustomPayload } from '../interfaces/Auth';
+import { ClipLoader } from 'react-spinners';
 
 const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY;
 
@@ -20,6 +21,7 @@ const Login = () => {
         email: '',
         password: ''
     });
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const userToken = localStorage.getItem('token');
     const decodedToken = userToken ? jwtDecode<IJwtCustomPayload>(userToken) : null;
@@ -73,12 +75,14 @@ const Login = () => {
     // handle login process
     const handleLogin = () => {
         if (validateForm()) {
+            setLoading(true);
             const encryptedPassword = encryptPassword(password);
             if (!encryptedPassword) {
                 setErrors(prev => ({
                     ...prev,
                     password: 'Error encrypting password. Please try again.'
                 }));
+                setLoading(false);
                 return;
             }
             const body = {
@@ -104,6 +108,9 @@ const Login = () => {
                         duration: 3000,
                         position: 'top-center',
                     });
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         }
     };
@@ -127,7 +134,7 @@ const Login = () => {
                                     placeholder="Email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    onBlur={() => validateForm()}
+                                    
                                 />
                             </div>
                             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -143,7 +150,7 @@ const Login = () => {
                                     placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    onBlur={() => validateForm()}
+                                    
                                 />
                                 <div className="absolute inset-y-0 end-0 flex items-center pe-3.5 cursor-pointer">
                                     {showPassword ? 
@@ -169,9 +176,17 @@ const Login = () => {
                     <div className='mt-[24px]'>
                         <button
                             onClick={handleLogin}
-                            className="bg-[#00E2AC] text-white w-full rounded-[8px] text-[15px] font-semibold py-3 hover:bg-[#00D0B9] transition-all ease-in-out duration-300"
+                            disabled={loading}
+                            className="bg-[#00E2AC] text-white w-full rounded-[8px] text-[15px] font-semibold py-3 hover:bg-[#00D0B9] transition-all ease-in-out duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                         >
-                            Log In
+                            {loading ? (
+                                <>
+                                    <ClipLoader color="#FFFFFF" size={16} className="mr-2" />
+                                    <span>Logging in...</span>
+                                </>
+                            ) : (
+                                'Log In'
+                            )}
                         </button>
                     </div>
                     <div className='mt-[24px] mb-[40px] md:mb-[0px]'>

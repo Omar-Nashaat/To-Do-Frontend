@@ -153,13 +153,13 @@ const Home = () => {
         {/* Create new todo button */}
         <button
           onClick={() => handleOpenModal()}
-          className="mb-8 bg-[#00E2AC] text-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-[#00D0B9] transition-all duration-300"
+          className="mb-4 bg-[#00E2AC] text-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-[#00D0B9] transition-all duration-300 w-full md:w-auto"
         >
           <MdAdd className="text-xl" />
           <span>Create New Todo List</span>
         </button>
         {/* Todo lists grid */}
-        {numberOfLists !== 0 ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {numberOfLists !== 0 ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {todos.map((todo) => (
             <div
               key={todo._id}

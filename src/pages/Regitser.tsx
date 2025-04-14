@@ -7,6 +7,7 @@ import axiosInstance from '../services/api/axios';
 import { useState } from 'react';
 import * as CryptoJS from 'crypto-js';
 import toast from 'react-hot-toast';
+import { ClipLoader } from 'react-spinners';
 
 const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY;
 
@@ -15,6 +16,7 @@ const Regitser = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     name: '',
     email: '',
@@ -76,12 +78,14 @@ const Regitser = () => {
   // handle register process
   const register = () => {
     if (validateForm()) {
+      setLoading(true);
       const encryptedPassword = encryptPassword(password);
       if (!encryptedPassword) {
         setErrors(prev => ({
           ...prev,
           password: 'Error encrypting password. Please try again.'
         }));
+        setLoading(false);
         return;
       }
       const body = {
@@ -106,6 +110,9 @@ const Regitser = () => {
             position: 'top-center',
           });
         })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   }
 
@@ -137,7 +144,7 @@ const Regitser = () => {
                   className={`bg-[#FFFFFF] border ${errors.name ? 'border-red-500' : 'border-[#E0E2E9]'} rounded-[8px] text-[#3A424A] text-[14px] rounded-lgblock w-full ps-10 p-3`}
                   placeholder="Name"
                   value={name}
-                  onBlur={() => validateForm()}
+
                 />
               </div>
               {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -153,7 +160,7 @@ const Regitser = () => {
                   className={`bg-[#FFFFFF] border ${errors.email ? 'border-red-500' : 'border-[#E0E2E9]'} rounded-[8px] text-[#3A424A] text-[14px] rounded-lgblock w-full ps-10 p-3`}
                   placeholder="Email"
                   value={email}
-                  onBlur={() => validateForm()}
+
                 />
               </div>
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -169,12 +176,12 @@ const Regitser = () => {
                   className={`bg-[#FFFFFF] border ${errors.password ? 'border-red-500' : 'border-[#E0E2E9]'} rounded-[8px] text-[#3A424A] text-[14px] rounded-lgblock w-full ps-10 p-3`}
                   placeholder="Password"
                   value={password}
-                  onBlur={() => validateForm()}
+
                 />
                 <div className="absolute inset-y-0 end-0 flex items-center pe-3.5 cursor-pointer">
-                  {showPassword ? 
-                    <LuEyeOff onClick={() => setShowPassword(false)} className='text-[#ADB0CD] text-[20px]' /> 
-                    : 
+                  {showPassword ?
+                    <LuEyeOff onClick={() => setShowPassword(false)} className='text-[#ADB0CD] text-[20px]' />
+                    :
                     <LuEye onClick={() => setShowPassword(true)} className='text-[#ADB0CD] text-[20px]' />
                   }
                 </div>
@@ -183,7 +190,20 @@ const Regitser = () => {
             </div>
           </div>
           <div className='mt-[24px]'>
-            <button onClick={register} className="bg-[#00E2AC] text-white w-full rounded-[8px] text-[15px] font-semibold py-3 hover:bg-[#00D0B9] transition-all ease-in-out duration-300">Sign Up</button>
+            <button
+              onClick={register}
+              disabled={loading}
+              className="bg-[#00E2AC] text-white w-full rounded-[8px] text-[15px] font-semibold py-3 hover:bg-[#00D0B9] transition-all ease-in-out duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            >
+              {loading ? (
+                <>
+                  <ClipLoader color="#FFFFFF" size={16} className="mr-2" />
+                  <span>Signing up...</span>
+                </>
+              ) : (
+                'Sign Up'
+              )}
+            </button>
           </div>
           <div className='mt-[24px] mb-[40px] md:mb-[0px]'>
             <p className='text-[#969AB8] text-[15px] font-normal'>Already have an account? <Link to="/login" className='text-[#00E2AC] font-semibold'>Login</Link></p>

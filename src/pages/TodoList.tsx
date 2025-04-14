@@ -414,24 +414,24 @@ const TodoList = () => {
 
         {/* Keyboard Shortcuts Guide */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <h2 className="text-lg font-semibold text-[#3A424A] mb-3">Keyboard Shortcuts</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <h2 className="text-lg font-semibold text-[#3A424A] mb-4">Keyboard Shortcuts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <div className="flex items-center justify-between text-sm mb-2">
+              <div className="flex items-center justify-between text-sm mb-0 md:mb-2">
                 <span className="text-[#969AB8]">Navigate Tasks</span>
                 <span className="text-[#3A424A] font-medium">↑/↓ Arrow Keys</span>
               </div>
-              <div className="flex items-center justify-between text-sm mb-2">
+              <div className="flex items-center justify-between text-sm mb-0 md:mb-2">
                 <span className="text-[#969AB8]">Mark as Complete</span>
                 <span className="text-[#3A424A] font-medium">Space</span>
               </div>
             </div>
             <div>
-              <div className="flex items-center justify-between text-sm mb-2">
+              <div className="flex items-center justify-between text-sm mb-0 md:mb-2">
                 <span className="text-[#969AB8]">Edit Task</span>
                 <span className="text-[#3A424A] font-medium">E or Enter</span>
               </div>
-              <div className="flex items-center justify-between text-sm mb-2">
+              <div className="flex items-center justify-between text-sm mb-0 md:mb-2">
                 <span className="text-[#969AB8]">Delete Task</span>
                 <span className="text-[#3A424A] font-medium">Delete</span>
               </div>
@@ -454,7 +454,7 @@ const TodoList = () => {
             <button
               type="submit"
               disabled={addingTask}
-              className="bg-[#00E2AC] text-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-[#00D0B9] transition-all duration-300 disabled:opacity-50"
+              className="bg-[#00E2AC] text-white px-2 md:px-6 py-2 md:py-3 rounded-lg flex items-center hover:bg-[#00D0B9] transition-all duration-300 disabled:opacity-50"
             >
               {addingTask ? (
                 <AiOutlineLoading3Quarters className="animate-spin text-xl" />
