@@ -29,7 +29,7 @@ const Login = () => {
 
     useEffect(() => {
         if (loggedIn) {
-            toast.success('You are already logged in', {
+            toast.success('You are remebered', {
                 duration: 2000,
                 position: 'top-center',
             });
